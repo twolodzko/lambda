@@ -1,0 +1,23 @@
+(library
+ (name term_test)
+ (modules term_test)
+ (libraries term)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test)))
+
+(library
+ (name eval_test)
+ (modules eval_test)
+ (libraries term eval parser reader)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test)))
+
+(library
+ (name parser_test)
+ (modules parser_test)
+ (libraries term parser reader)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test)))

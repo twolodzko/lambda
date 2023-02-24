@@ -1,0 +1,31 @@
+(library
+ (name term)
+ (modules term)
+ (preprocess
+  (pps bisect_ppx --conditional)))
+
+(library
+ (name reader)
+ (modules reader)
+ (preprocess
+  (pps bisect_ppx --conditional)))
+
+(library
+ (name parser)
+ (modules parser)
+ (libraries term)
+ (preprocess
+  (pps bisect_ppx --conditional)))
+
+(library
+ (name eval)
+ (modules eval)
+ (libraries term parser)
+ (preprocess
+  (pps bisect_ppx --conditional)))
+
+(executable
+ (name main)
+ (modules main)
+ (public_name main)
+ (libraries term eval parser reader))
