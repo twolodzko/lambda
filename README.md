@@ -87,37 +87,6 @@ When the `lhs` is *not* a variable name, `=` can be used for regular assertions,
 * To build the `lambda` binary run the [`just` command]. Call it as `./lambda [filename]...` or `./lambda` to launch REPL.
 * `just repl` starts the REPL.
 
-## Implementation
-
-If we ignore some technical details, is implemented in terms of the `term` type
-
-```ocaml
-type term =
-  | Var of string         (* variable *)
-  | App of term * term    (* application *)
-  | Abs of string * term  (* abstraction *)
-```
-
-where the reduction is
-
-```ocaml
-let rec reduce = function
-  | (Var _ | Abs _) as x -> x
-  | App (t, u) ->
-      match reduce t with
-        | Abs (x, t') -> subst x (reduce u) t'
-        | t -> App (t, reduce u)
-```
-
-and the substitution is
-
-```ocaml
-let rec subst x t = function
-  | Var y -> if y = x then t else Var y
-  | App (u, v) -> App (subst x t u, subst x t v)
-  | Abs (y, u) -> Abs (y, subst x t u)
-```
-
 
  [Lambda calculus]: https://en.wikipedia.org/wiki/Lambda_calculus
  [`just` command]: https://github.com/casey/just
