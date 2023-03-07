@@ -39,8 +39,6 @@ and `#`. In the implementation, `\` translates to $\lambda$. The words are separ
 with white spaces, so $\lambda xy.xy$ will be written as `\ x y . x y`. Additionally, the round brackets can be used
 for grouping terms, e.g. `(\x.x)y`. 
 
-
-
 `#` marks the start of the comment that continues till the end of the line. It can also 
 be used to split the expression between multiple lines, e.g.
 
