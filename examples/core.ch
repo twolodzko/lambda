@@ -9,4 +9,4 @@ B = \ x y z . x (y z)
 C = \ x y z . x z y
 W = \ x y . x y y
 U = \ x . x x
-Omega = U U
+Ω = U U

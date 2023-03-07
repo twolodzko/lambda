@@ -1,3 +1,8 @@
+(ocamllex lexer)
+
+(menhir
+ (modules parser))
+
 (library
  (name term)
  (modules term)
@@ -5,22 +10,16 @@
   (pps bisect_ppx --conditional)))
 
 (library
- (name reader)
- (modules reader)
- (preprocess
-  (pps bisect_ppx --conditional)))
-
-(library
- (name parser)
- (modules parser)
+ (name eval)
+ (modules eval)
  (libraries term)
  (preprocess
   (pps bisect_ppx --conditional)))
 
 (library
- (name eval)
- (modules eval)
- (libraries term parser)
+ (name reader)
+ (modules reader parser lexer)
+ (libraries term)
  (preprocess
   (pps bisect_ppx --conditional)))
 
@@ -28,4 +27,4 @@
  (name main)
  (modules main)
  (public_name main)
- (libraries term eval parser reader))
+ (libraries reader term eval))

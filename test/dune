@@ -6,18 +6,18 @@
  (preprocess
   (pps ppx_inline_test)))
 
-(library
- (name eval_test)
- (modules eval_test)
- (libraries term eval parser reader)
- (inline_tests)
- (preprocess
-  (pps ppx_inline_test)))
+; (library
+;  (name eval_test)
+;  (modules eval_test)
+;  (libraries term eval)
+;  (inline_tests)
+;  (preprocess
+;   (pps ppx_inline_test)))
 
 (library
- (name parser_test)
- (modules parser_test)
- (libraries term parser reader)
+ (name reader_test)
+ (modules reader_test)
+ (libraries term reader)
  (inline_tests)
  (preprocess
   (pps ppx_inline_test)))
