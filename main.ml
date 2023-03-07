@@ -2,27 +2,29 @@ open Eval
 open Reader
 open Term
 open Lexing
+open Reduce
 
-let print_not_equal x x' =
-  Printf.printf
-    "Error: %s and %s are not the same\n"
-    (string_of_term x)
-    (string_of_term x')
+let string_of_error = function
+  | Not_equal (x, x') ->
+      Printf.sprintf
+        "Error: %s and %s are not the same\n"
+        (string_of_term x)
+        (string_of_term x')
+  | Unexpected x ->
+      Printf.sprintf
+        "Error: unexpected argument %s\n"
+        (string_of_term x)
+  | err -> raise err
 
-let print_unexpected x =
-  Printf.printf
-    "Error: unexpected argument %s\n"
-    (string_of_term x)
+let show t =
+  Printf.printf "# ↪ %s\n" (string_of_term t)
 
 let read_eval lexer =
   let t = read lexer in
-  try
-    let _ = eval t in ()
-  with
-    | Not_equal (x, x') ->
-        print_not_equal x x'
-    | Unexpected x ->
-        print_unexpected x
+  match eval t with
+    | exception err ->
+        print_string (string_of_error err)
+    | t -> show t
 
 let rec repl lexer =
   print_newline ();
@@ -38,10 +40,9 @@ let eval_file path =
       let t = read lexer in
       Printf.printf "%s\n" (string_of_term t);
       match eval t with
-        | exception Not_equal (x, x') ->
-            print_not_equal x x';
-        | exception Unexpected x ->
-            print_unexpected x;
+        | exception err ->
+            Printf.eprintf "%s" (string_of_error err);
+            exit 2
         | _ -> ();
       print_newline ();
       impl lexer

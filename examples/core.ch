@@ -10,3 +10,8 @@ C = \ x y z . x z y
 W = \ x y . x y y
 U = \ x . x x
 Ω = U U
+# Y = \ g . (\ x . g (x x)) (\ x . g (x x))
+
+I = I I I
+
+# (\ x . y) Ω

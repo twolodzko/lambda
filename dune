@@ -12,6 +12,13 @@
 (library
  (name eval)
  (modules eval)
+ (libraries term reduce)
+ (preprocess
+  (pps bisect_ppx --conditional)))
+
+(library
+ (name reduce)
+ (modules reduce)
  (libraries term)
  (preprocess
   (pps bisect_ppx --conditional)))

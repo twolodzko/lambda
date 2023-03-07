@@ -1,9 +1,20 @@
 
 BINARY := "lambda"
 
+# Run tests
+test: unit-tests integration-tests
+
 # Run unit tests
-test: build
+unit-tests: build
 	dune runtest
+
+# Run integration tests
+integration-tests: build
+	set -e
+	./{{BINARY}} examples/core.ch    1>/dev/null
+	./{{BINARY}} examples/logic.ch   1>/dev/null
+	./{{BINARY}} examples/numbers.ch 1>/dev/null
+	./{{BINARY}} examples/pairs.ch   1>/dev/null
 
 # Start the REPL
 repl: build

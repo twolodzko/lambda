@@ -5,7 +5,7 @@ F = \ x y . y
 1 = \ f x . f x
 2 = \ f x . f (f x)
 3 = \ f x . f (f (f x))
-succ = \ n f x . n f (f x)
+succ = \ n f x . f (n f x)
 
 0 = 0
 1 = succ 0
@@ -43,3 +43,8 @@ leq = \ m n . iszero (sub m n)
 F = leq 2 1
 F = leq 3 1
 T = leq 1 2
+
+add 3 1 = mul 2 2
+1 = mul 1 1
+2 = mul 1 2
+3 = mul 1 3
