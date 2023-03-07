@@ -68,8 +68,7 @@ x = T
 x = T 
 # ↪ T 
 
-x = F 
-# ↪ F
+x = F
 Error: T and F are not the same
 ```
 
