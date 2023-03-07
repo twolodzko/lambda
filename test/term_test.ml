@@ -10,6 +10,9 @@ let%test _ =
     string_of_term (App (App (Var "x", Var "y"), Var "z"))
     = "x y z"
 let%test _ =
+    string_of_term (App (Var "x", App (Var "y", Var "z")))
+    = "x (y z)"
+let%test _ =
     string_of_term (Abs ("x", Var "x"))
     = "λ x . x"
 let%test _ =
