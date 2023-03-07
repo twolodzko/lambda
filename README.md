@@ -48,7 +48,6 @@ be used to split the expression between multiple lines, e.g.
 (\x. # 
 x    #
 ) y 
-# ↪ (λ x . x) y
 # ↪ y
 ```
 
