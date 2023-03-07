@@ -31,6 +31,9 @@ let%test _ =
   read (from_string "(x t) u")
   = App (App (Var "x", Var "t"), Var "u")
 let%test _ =
+  read (from_string "x t u")
+  = App (App (Var "x", Var "t"), Var "u")
+let%test _ =
   read (from_string "\\ x . x")
   = Abs ("x", Var "x")
 let%test _ =
