@@ -6,13 +6,13 @@
  (preprocess
   (pps ppx_inline_test)))
 
-; (library
-;  (name eval_test)
-;  (modules eval_test)
-;  (libraries term eval)
-;  (inline_tests)
-;  (preprocess
-;   (pps ppx_inline_test)))
+(library
+ (name eval_test)
+ (modules eval_test)
+ (libraries term eval reduce reader)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test)))
 
 (library
  (name reader_test)
