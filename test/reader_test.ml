@@ -1,6 +1,5 @@
 open Term
 open Reader
-open Lexing
 
 let%test _ =
   read (from_string "x")
@@ -11,7 +10,7 @@ let%test _ =
 let%test _ =
   try
     let _ = read (from_string "()") in false
-  with Reader.Parsing_error -> true
+  with Errors.Parsing_error -> true
 let%test _ =
   read (from_string "(x)")
   = Var "x"

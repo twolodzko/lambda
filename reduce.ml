@@ -1,7 +1,5 @@
 open Term
 
-exception Unexpected of term
-
 module Env = Map.Make(String)
 let env = ref Env.empty
 
@@ -21,7 +19,7 @@ let rec subst x t = function
       let y' = fresh y in
       let u = subst y (Var y') u in
       Abs (y', subst x t u)
-  | Def _ as x -> raise (Unexpected x)
+  | Def _ as x -> raise (Errors.Unexpected x)
 
 let rec reduce_cbv = function
   | Var x -> (
@@ -35,7 +33,7 @@ let rec reduce_cbv = function
         | Abs (x, t') -> subst x (reduce_cbv u) t'
         | t -> App (t, reduce_cbv u)
   )
-  | Def _ as x -> raise (Unexpected x)
+  | Def _ as x -> raise (Errors.Unexpected x)
 
 let rec reduce_ao = function
   | Var x -> (
@@ -49,7 +47,7 @@ let rec reduce_ao = function
         | Abs (x, t') -> subst x (reduce_ao u) t'
         | t -> App (t, reduce_ao u)
   )
-  | Def _ as x -> raise (Unexpected x)
+  | Def _ as x -> raise (Errors.Unexpected x)
 
 let rec reduce_cbn = function
   | Var x -> (
@@ -63,7 +61,7 @@ let rec reduce_cbn = function
         | Abs (x, t') -> subst x u t'
         | t -> App (t, u)
   )
-  | Def _ as x -> raise (Unexpected x)
+  | Def _ as x -> raise (Errors.Unexpected x)
 
 let rec reduce_no = function
   | Var x -> (
@@ -77,7 +75,7 @@ let rec reduce_no = function
         | Abs (x, t') -> subst x u t'
         | t -> App (reduce_no t, reduce_no u)
   )
-  | Def _ as x -> raise (Unexpected x)
+  | Def _ as x -> raise (Errors.Unexpected x)
 
 let reduce = reduce_ao
 

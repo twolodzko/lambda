@@ -1,7 +1,5 @@
-open Term
 open Reduce
-
-exception Not_equal of term * term
+open Term
 
 let rec equal a b =
   match (a, b) with
@@ -16,7 +14,7 @@ let rec equal a b =
 
 let assert_equal a b =
   if not (equal a b) then
-    raise (Not_equal (a, b))
+    raise (Errors.Not_equal (a, b))
 
 let rec eval t =
   match t with

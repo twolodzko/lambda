@@ -9,7 +9,7 @@
 (library
  (name eval_test)
  (modules eval_test)
- (libraries term eval reduce reader)
+ (libraries term eval reduce reader errors)
  (inline_tests)
  (preprocess
   (pps ppx_inline_test)))
@@ -17,7 +17,7 @@
 (library
  (name reader_test)
  (modules reader_test)
- (libraries term reader)
+ (libraries term reader errors)
  (inline_tests)
  (preprocess
   (pps ppx_inline_test)))

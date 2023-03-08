@@ -10,23 +10,30 @@
   (pps bisect_ppx --conditional)))
 
 (library
+ (name errors)
+ (modules errors)
+ (libraries term)
+ (preprocess
+  (pps bisect_ppx --conditional)))
+
+(library
  (name eval)
  (modules eval)
- (libraries term reduce)
+ (libraries term reduce errors)
  (preprocess
   (pps bisect_ppx --conditional)))
 
 (library
  (name reduce)
  (modules reduce)
- (libraries term)
+ (libraries term errors)
  (preprocess
   (pps bisect_ppx --conditional)))
 
 (library
  (name reader)
  (modules reader parser lexer)
- (libraries term)
+ (libraries term errors)
  (preprocess
   (pps bisect_ppx --conditional)))
 
@@ -34,4 +41,4 @@
  (name main)
  (modules main)
  (public_name main)
- (libraries reader term eval))
+ (libraries reader term eval errors))

@@ -2,7 +2,6 @@ open Eval
 open Term
 open Reader
 open Reduce
-open Lexing
 
 let parse_eval s =
     eval (read (from_string s))
@@ -50,7 +49,7 @@ let%test _ =
     let _ = parse_eval "x = 1" in
     let _ = parse_eval "x = 1" in
     let _ = parse_eval "x = 2" in false
-  with Not_equal _ -> true
+  with Errors.Not_equal _ -> true
 
 let%test _ =
   equal
